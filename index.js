@@ -1,6 +1,6 @@
-import http from "http";
-import { URL } from "url";
-import fs from "fs/promises";
+const http = require("http");
+const { URL } = require("url");
+const fs = require("fs/promises");
 
 http
   .createServer(async (req, res) => {
