@@ -1,0 +1,25 @@
+{
+  "name": "basic-informational-site",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "A simple Node.js server that serves static HTML pages based on the requested URL path.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LazyEllis/basic-informational-site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LazyEllis/basic-informational-site/issues"
+  },
+  "homepage": "https://github.com/LazyEllis/basic-informational-site#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

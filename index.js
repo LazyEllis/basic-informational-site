@@ -1,28 +1,26 @@
-const http = require("http");
-const { URL } = require("url");
-const fs = require("fs/promises");
+import express from "express";
 
-http
-  .createServer(async (req, res) => {
-    const url = new URL(req.url, "http://localhost:3000/");
-    const pathname = url.pathname === "/" ? "/index" : url.pathname;
-    const filename = `./pages${pathname}.html`;
+const app = express();
 
-    try {
-      const data = await fs.readFile(filename);
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.write(data);
-      res.end();
-    } catch {
-      try {
-        const data = await fs.readFile("./pages/404.html");
-        res.writeHead(404, { "Content-Type": "text/html" });
-        res.write(data);
-        res.end();
-      } catch {
-        res.writeHead(500, { "Content-Type": "text/html" });
-        res.end("Internal Server Error");
-      }
-    }
-  })
-  .listen(8080);
+const options = { root: import.meta.dirname };
+
+app.get("/", (req, res) => {
+  res.sendFile("./pages/index.html", options);
+});
+
+app.get("/about", (req, res) => {
+  res.sendFile("./pages/about.html", options);
+});
+
+app.get("/contact-me", (req, res) => {
+  res.sendFile("./pages/contact-me.html", options);
+});
+
+app.use((req, res, next) => {
+  res.status(404).sendFile("./pages/404.html", options);
+});
+
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});
